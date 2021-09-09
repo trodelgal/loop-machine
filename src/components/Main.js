@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Wrapper, GridDiv, Center } from "../styles/styledComponents";
+import Playlist from "./Playlist";
 import Pad from "./Pad";
 import {
   futureFunk,
@@ -29,7 +30,7 @@ export default function Main() {
   const classes = useStyles();
   const [controlButtons, setControlButtons] = useState("stop");
   const [loop, setLoop] = useState();
-  const [loopEnd,setLoopEnd] = useState(false)
+  const [loopEnd, setLoopEnd] = useState(false);
   const [playList, setPlayList] = useState([]);
   const [audioState, setAudioState] = useState([
     {
@@ -71,58 +72,67 @@ export default function Main() {
   ]);
 
   const changeController = (event, newValue) => {
-    setControlButtons(newValue);
+    if(loop){
+      setControlButtons(newValue);
+    }
   };
 
   const padClick = (loop, index) => {
-      setPlayList([...playList,loop]);
+    setPlayList([...playList, loop]);
   };
 
   useEffect(() => {
     if (playList[0]) {
-      if(!loop){
+      if (!loop) {
         setLoop(playList[0]);
       }
+    }else{
+      setControlButtons("stop")
     }
   }, [playList]);
 
   useEffect(() => {
     if (loop) {
-      loop.src.on("end", ()=>{
-        setLoopEnd(true)
-      })
+      loop.src.on("end", () => {
+        setLoopEnd(true);
+      });
+      setControlButtons("play");
       loop.src.play();
-      setLoopEnd(false)
+      setLoopEnd(false);
     }
   }, [loop]);
 
   useEffect(() => {
-    if(loopEnd){
+    if (loopEnd) {
       let newPlayList = playList.slice(1);
-      setLoop()
+      setLoop();
       setPlayList(newPlayList);
     }
   }, [loopEnd]);
 
-
-  // useEffect(() => {
-  //   if (controlButtons === "play") {
-  //     electricGuitar.play();
-  //   } else if (controlButtons === "pause") {
-  //     electricGuitar.pause();
-  //   } else if (controlButtons === "stop") {
-  //     electricGuitar.stop();
-  //     setPlayQueue([]);
-  //   }
-  // }, [controlButtons]);
+  useEffect(() => {
+    if (controlButtons === "play") {
+      loop.src.play();
+    } else if (controlButtons === "pause") {
+      loop.src.pause();
+    } else if (controlButtons === "stop") {
+      if (loop) {
+        loop.src.stop();
+        setLoop()
+        setPlayList([]);
+      }
+    }
+  }, [controlButtons]);
 
   return (
     <Wrapper width="1000px">
-      <GridDiv repeatFormula="1fr 1fr 1fr">
-        {audioState.map((loop, index) => (
-          <Pad key={index} loop={loop} padClick={padClick} />
-        ))}
-        ;
+      <GridDiv repeatFormula="3fr 1fr">
+        <GridDiv repeatFormula="1fr 1fr 1fr">
+          {audioState.map((loop, index) => (
+            <Pad key={index} loop={loop} padClick={padClick} />
+          ))}
+        </GridDiv>
+        <Playlist playlistLoop={playList} />
       </GridDiv>
       <BottomNavigation
         value={controlButtons}
