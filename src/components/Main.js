@@ -12,7 +12,6 @@ import {
   mazePolitics,
   silentStar,
 } from "../loops/Howls";
-import { Howl, Howler } from "howler";
 import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
@@ -29,52 +28,45 @@ const useStyles = makeStyles({
 export default function Main() {
   const classes = useStyles();
   const [controlButtons, setControlButtons] = useState("stop");
-  const [playQueue, setPlayQueue] = useState([]);
+  const [loop, setLoop] = useState();
+  const [loopEnd,setLoopEnd] = useState(false)
+  const [playList, setPlayList] = useState([]);
   const [audioState, setAudioState] = useState([
     {
       name: "futureFunk",
       src: futureFunk,
-      isOn: false,
     },
     {
       name: "stutterBreakbeats",
       src: stutterBreakbeats,
-      isOn: false,
     },
     {
       name: "electricGuitar",
       src: electricGuitar,
-      isOn: false,
     },
     {
       name: "stompySlosh",
       src: stompySlosh,
-      isOn: false,
     },
     {
       name: "groove1",
       src: groove1,
-      isOn: false,
     },
     {
       name: "groove2",
       src: groove2,
-      isOn: false,
     },
     {
       name: "mazePolitics",
       src: mazePolitics,
-      isOn: false,
     },
     {
       name: "silentStar",
       src: silentStar,
-      isOn: false,
     },
     {
       name: "bassWarwick",
       src: bassWarwick,
-      isOn: false,
     },
   ]);
 
@@ -82,33 +74,48 @@ export default function Main() {
     setControlButtons(newValue);
   };
 
-  useEffect(() => {
-    if (controlButtons === "play") {
-      electricGuitar.play();
-    } else if (controlButtons === "pause") {
-      electricGuitar.pause();
-    } else if (controlButtons === "stop") {
-      electricGuitar.stop();
-      setPlayQueue([]);
-    }
-  }, [controlButtons]);
-
-  const padClick = (loop,index) => {
-    if(playQueue[0]){
-        setPlayQueue([...playQueue,loop]);
-        // setAudioState(()=>{
-        //   audioState[index].isOn = true;
-        // })
-    }
-    else{
-        setPlayQueue([...playQueue,loop]);
-        loop.src.play()
-    }
+  const padClick = (loop, index) => {
+      setPlayList([...playList,loop]);
   };
 
   useEffect(() => {
-      console.log(playQueue)
-  }, [playQueue]);
+    if (playList[0]) {
+      if(!loop){
+        setLoop(playList[0]);
+      }
+    }
+  }, [playList]);
+
+  useEffect(() => {
+    if (loop) {
+      loop.src.on("end", ()=>{
+        setLoopEnd(true)
+      })
+      loop.src.play();
+      setLoopEnd(false)
+    }
+  }, [loop]);
+
+  useEffect(() => {
+    if(loopEnd){
+      let newPlayList = playList.slice(1);
+      setLoop()
+      setPlayList(newPlayList);
+    }
+  }, [loopEnd]);
+
+
+  // useEffect(() => {
+  //   if (controlButtons === "play") {
+  //     electricGuitar.play();
+  //   } else if (controlButtons === "pause") {
+  //     electricGuitar.pause();
+  //   } else if (controlButtons === "stop") {
+  //     electricGuitar.stop();
+  //     setPlayQueue([]);
+  //   }
+  // }, [controlButtons]);
+
   return (
     <Wrapper width="1000px">
       <GridDiv repeatFormula="1fr 1fr 1fr">
