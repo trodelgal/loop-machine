@@ -1,18 +1,14 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { Wrapper, GridDiv, Center } from "../styles/styledComponents";
+import React, { useEffect, useState } from "react";
+import {
+  Wrapper,
+  GridDiv,
+  Header,
+  Title,
+  MainTitle,
+} from "../styles/styledComponents";
 import Playlist from "./Playlist";
 import Pad from "./Pad";
-import {
-  futureFunk,
-  stutterBreakbeats,
-  bassWarwick,
-  electricGuitar,
-  stompySlosh,
-  groove1,
-  groove2,
-  mazePolitics,
-  silentStar,
-} from "../loops/Howls";
+import {loopsArr} from "../loops/Howls";
 import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
@@ -21,8 +17,13 @@ import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import StopIcon from "@material-ui/icons/Stop";
 const useStyles = makeStyles({
   root: {
-    width: "50%",
+    width: "100%",
     margin: 5,
+    background: "none",
+    color: "white",
+  },
+  label: {
+    color: "white",
   },
 });
 
@@ -32,47 +33,10 @@ export default function Main() {
   const [loop, setLoop] = useState();
   const [loopEnd, setLoopEnd] = useState(false);
   const [playList, setPlayList] = useState([]);
-  const [audioState, setAudioState] = useState([
-    {
-      name: "futureFunk",
-      src: futureFunk,
-    },
-    {
-      name: "stutterBreakbeats",
-      src: stutterBreakbeats,
-    },
-    {
-      name: "electricGuitar",
-      src: electricGuitar,
-    },
-    {
-      name: "stompySlosh",
-      src: stompySlosh,
-    },
-    {
-      name: "groove1",
-      src: groove1,
-    },
-    {
-      name: "groove2",
-      src: groove2,
-    },
-    {
-      name: "mazePolitics",
-      src: mazePolitics,
-    },
-    {
-      name: "silentStar",
-      src: silentStar,
-    },
-    {
-      name: "bassWarwick",
-      src: bassWarwick,
-    },
-  ]);
+  const [audioState, setAudioState] = useState(loopsArr);
 
   const changeController = (event, newValue) => {
-    if(loop){
+    if (loop) {
       setControlButtons(newValue);
     }
   };
@@ -82,12 +46,13 @@ export default function Main() {
   };
 
   useEffect(() => {
+    console.log(playList);
     if (playList[0]) {
       if (!loop) {
         setLoop(playList[0]);
       }
-    }else{
-      setControlButtons("stop")
+    } else {
+      setControlButtons("stop");
     }
   }, [playList]);
 
@@ -118,40 +83,52 @@ export default function Main() {
     } else if (controlButtons === "stop") {
       if (loop) {
         loop.src.stop();
-        setLoop()
+        setLoop();
         setPlayList([]);
       }
     }
   }, [controlButtons]);
 
   return (
-    <Wrapper width="1000px">
-      <GridDiv repeatFormula="3fr 1fr">
+    <>
+      <Header>
+        <Title>
+          <MainTitle>LOOP MACHINE</MainTitle>
+        </Title>
+      </Header>
+      <Wrapper>
         <GridDiv repeatFormula="1fr 1fr 1fr">
           {audioState.map((loop, index) => (
             <Pad key={index} loop={loop} padClick={padClick} />
           ))}
         </GridDiv>
-        <Playlist playlistLoop={playList} />
-      </GridDiv>
-      <BottomNavigation
-        value={controlButtons}
-        onChange={changeController}
-        showLabels
-        className={classes.root}
-      >
-        <BottomNavigationAction label="STOP" value="stop" icon={<StopIcon />} />
-        <BottomNavigationAction
-          label="PLAY"
-          value="play"
-          icon={<PlayArrowIcon />}
-        />
-        <BottomNavigationAction
-          label="PAUSE"
-          value="pause"
-          icon={<PauseIcon />}
-        />
-      </BottomNavigation>
-    </Wrapper>
+        <BottomNavigation
+          value={controlButtons}
+          onChange={changeController}
+          showLabels
+          className={classes.root}
+        >
+          <BottomNavigationAction
+            className={classes.label}
+            label="STOP"
+            value="stop"
+            icon={<StopIcon />}
+          />
+          <BottomNavigationAction
+            className={classes.label}
+            label="PLAY"
+            value="play"
+            icon={<PlayArrowIcon />}
+          />
+          <BottomNavigationAction
+            className={classes.label}
+            label="PAUSE"
+            value="pause"
+            icon={<PauseIcon />}
+          />
+        </BottomNavigation>
+        <Playlist playlistLoop={playList} setPlayList={setPlayList} />
+      </Wrapper>
+    </>
   );
 }

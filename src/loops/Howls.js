@@ -36,3 +36,50 @@ export const groove2 = new Howl({
 export const mazePolitics = new Howl({
     src: [mazePoliticsFile],
 });
+export const loopsArr =[
+    {
+        name: "futureFunk",
+        src: futureFunk,
+        color: "#c04746",
+      },
+      {
+        name: "stutterBreakbeats",
+        src: stutterBreakbeats,
+        color: "#d79c64",
+      },
+      {
+        name: "electricGuitar",
+        src: electricGuitar,
+        color: "#dcca21",
+      },
+      {
+        name: "stompySlosh",
+        src: stompySlosh,
+        color: "#74d144",
+      },
+      {
+        name: "groove1",
+        src: groove1,
+        color: "#5bc1da",
+      },
+      {
+        name: "groove2",
+        src: groove2,
+        color: "#6f88da",
+      },
+      {
+        name: "mazePolitics",
+        src: mazePolitics,
+        color: "#864ecf",
+      },
+      {
+        name: "silentStar",
+        src: silentStar,
+        color: "#e07ec0",
+      },
+      {
+        name: "bassWarwick",
+        src: bassWarwick,
+        color: "#bdc1c4",
+      },
+]
