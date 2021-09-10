@@ -38,55 +38,55 @@ export const mazePolitics = new Howl({
 });
 export const loopsArr =[
     {
-        name: "futureFunk",
+        name: "Electro Funk",
         src: futureFunk,
         color: "#c04746",
         state:false
       },
       {
-        name: "stutterBreakbeats",
+        name: "Spooky Groove",
         src: stutterBreakbeats,
         color: "#d79c64",
         state:false
       },
       {
-        name: "electricGuitar",
+        name: "Electric Guitar",
         src: electricGuitar,
         color: "#dcca21",
         state:false
       },
       {
-        name: "stompySlosh",
+        name: "Heavy Hitter",
         src: stompySlosh,
         color: "#74d144",
         state:false
       },
       {
-        name: "groove1",
+        name: "Disco",
         src: groove1,
         color: "#5bc1da",
         state:false
       },
       {
-        name: "groove2",
+        name: "Darbuka",
         src: groove2,
         color: "#6f88da",
         state:false
       },
       {
-        name: "mazePolitics",
+        name: "Appreggio",
         src: mazePolitics,
         color: "#864ecf",
         state:false
       },
       {
-        name: "silentStar",
+        name: "Scary",
         src: silentStar,
         color: "#e07ec0",
         state:false
       },
       {
-        name: "bassWarwick",
+        name: "Bass",
         src: bassWarwick,
         color: "#bdc1c4",
         state:false
