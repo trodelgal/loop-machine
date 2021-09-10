@@ -6,20 +6,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import PlaylistAddCheckIcon from "@material-ui/icons/PlaylistAddCheck";
 import PlayCircleFilledWhiteIcon from "@material-ui/icons/PlayCircleFilledWhite";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "80%",
-    maxWidth: 360,
-    position: "relative",
-    overflow: "auto",
-    maxHeight: 300,
-  },
-    ul: {
-      backgroundColor: "#f0e9e9",
-      padding: 0,
-    },
-}));
-
+// Component of the List of the audio in the playlist tab
 export default function PinnedSubheaderList({ playlistLoop, setPlayList }) {
   const classes = useStyles();
 
@@ -38,3 +25,17 @@ export default function PinnedSubheaderList({ playlistLoop, setPlayList }) {
     </List>
   );
 }
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "80%",
+    maxWidth: 360,
+    position: "relative",
+    overflow: "auto",
+    maxHeight: 300,
+  },
+    ul: {
+      backgroundColor: "#f0e9e9",
+      padding: 0,
+    },
+}));

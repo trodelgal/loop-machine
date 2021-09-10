@@ -13,6 +13,9 @@ import PauseIcon from "@material-ui/icons/Pause";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import StopIcon from "@material-ui/icons/Stop";
 
+// this is component of the playlist tab - 
+// by clicking add the audio to the playlist
+// while there are audios in the playlist the loop continue to play
 export default function QueueMachine() {
   const classes = useStyles();
   const [controlButtons, setControlButtons] = useState("stop");

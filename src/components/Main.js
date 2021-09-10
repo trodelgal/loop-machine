@@ -20,7 +20,7 @@ export default function Main() {
           </Title>
           <RouterDiv>
             <StyledLink to="/">Loop</StyledLink>
-            <StyledLink to="/list">playlist</StyledLink>
+            <StyledLink to="/list">Playlist</StyledLink>
           </RouterDiv>
         </Header>
         <Route exact path="/">

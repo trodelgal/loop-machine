@@ -8,6 +8,8 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import StopIcon from "@material-ui/icons/Stop";
 
+// this is the component of main looper tab - 
+// turn on and if the pad by clicking
 export default function QueueMachine() {
   const classes = useStyles();
   const [controller, setController] = useState();
@@ -62,7 +64,7 @@ export default function QueueMachine() {
       .filter((pad) => {
         return pad.state;
       })
-      .map((obj) => obj.src);
+      .map((audio) => audio.src);
     setNextLoop(newNextLoop);
   }, [audioState]);
 
