@@ -41,45 +41,54 @@ export const loopsArr =[
         name: "futureFunk",
         src: futureFunk,
         color: "#c04746",
+        state:false
       },
       {
         name: "stutterBreakbeats",
         src: stutterBreakbeats,
         color: "#d79c64",
+        state:false
       },
       {
         name: "electricGuitar",
         src: electricGuitar,
         color: "#dcca21",
+        state:false
       },
       {
         name: "stompySlosh",
         src: stompySlosh,
         color: "#74d144",
+        state:false
       },
       {
         name: "groove1",
         src: groove1,
         color: "#5bc1da",
+        state:false
       },
       {
         name: "groove2",
         src: groove2,
         color: "#6f88da",
+        state:false
       },
       {
         name: "mazePolitics",
         src: mazePolitics,
         color: "#864ecf",
+        state:false
       },
       {
         name: "silentStar",
         src: silentStar,
         color: "#e07ec0",
+        state:false
       },
       {
         name: "bassWarwick",
         src: bassWarwick,
         color: "#bdc1c4",
+        state:false
       },
 ]

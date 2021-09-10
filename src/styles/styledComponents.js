@@ -1,4 +1,13 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
+export const StyledLink = styled(Link)`
+  color: rgb(91, 56, 112);
+  font-weight: bold;
+  margin-top: 5%;
+  font-size: 25px;
+  text-decoration: ${(props) => (props.textDecoration ? "underline" : "none")};
+`;
 
 export const Wrapper = styled.div`
   margin: ${(props) => (props.margin ? props.margin : "5% auto")};
@@ -15,6 +24,7 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 export const Header = styled.div`
   display: flex;
   justify-content: space-between;
@@ -33,7 +43,7 @@ export const Title = styled.div`
   padding-right: 10px;
   background-color: rgb(91, 56, 112);
   :after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     right: 0;
@@ -44,8 +54,8 @@ export const Title = styled.div`
     border-color: transparent transparent rgb(23, 3, 1) transparent;
   }
   @media (max-width: 600px) {
-    display: none; 
-  } 
+    display: none;
+  }
 `;
 export const MainTitle = styled.h3`
   font-size: 25px;
@@ -55,23 +65,25 @@ export const MainTitle = styled.h3`
   color: rgb(6, 26, 65);
   @media (max-width: 900px) {
     font-size: 20px;
-    content: '';
-  } 
+    content: "";
+  }
 `;
 
 export const GridDiv = styled.div`
   display: grid;
   width: 80%;
+  margin: 5px;
   grid-template-columns: ${(props) =>
     props.repeatFormula ? props.repeatFormula : "1fr 1fr 1fr"};
 `;
 
-export const ListDiv = styled.div`
+export const RouterDiv = styled.div`
+  display: Grid;
   display: grid;
-  width: 95%;
-  background-color: "red";
+  width: 50%;
+  margin: 5px;
   grid-template-columns: ${(props) =>
-    props.repeatFormula ? props.repeatFormula : "1fr 1fr 1fr"};
+    props.repeatFormula ? props.repeatFormula : "1fr 1fr"};
 `;
 
 export const StyledDiv = styled.div`
@@ -88,6 +100,7 @@ export const StyledDiv = styled.div`
   border-radius: 2px;
   width: 100%;
   height: 100px;
+  opacity: ${(props) => (props.opacity ? props.opacity : 0.8)};
   &:hover {
     opacity: 0.7;
   }
